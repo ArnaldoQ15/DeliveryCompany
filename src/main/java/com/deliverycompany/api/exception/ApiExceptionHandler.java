@@ -1,4 +1,4 @@
-package com.deliverycompany.api.exceptionhandler;
+package com.deliverycompany.api.exception;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +37,26 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         Problem problem = new Problem();
         problem.setStatus(status.value());
-        problem.setDateHour(LocalDateTime.now());
+        problem.setDateHour(OffsetDateTime.now()); // OffsetDateTime = adiciona o UTC no final da data/hora
         problem.setTitle("One or more fields are invalid. Try again.");
         problem.setWarnings(warnings);
 
         return handleExceptionInternal(ex, problem, headers, status, request);
     }
+
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+
+        Problem problem = new Problem();
+        problem.setStatus(status.value());
+        problem.setDateHour(OffsetDateTime.now()); // OffsetDateTime = adiciona o UTC no final da data/hora
+        problem.setTitle(ex.getMessage());
+
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+    }
+
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<Object> handleBusiness(BusinessException ex, WebRequest request) {
@@ -50,7 +64,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         Problem problem = new Problem();
         problem.setStatus(status.value());
-        problem.setDateHour(LocalDateTime.now());
+        problem.setDateHour(OffsetDateTime.now()); // OffsetDateTime = adiciona o UTC no final da data/hora
         problem.setTitle(ex.getMessage());
 
         return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);

@@ -1,5 +1,6 @@
 package com.deliverycompany.api.model;
 
+import com.deliverycompany.api.exception.ValidationGroups;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,17 +11,19 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true) // Indica que o Equal e o Hashcode precisam ser os mesmos APENAS nos marcados¹
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) // Indica que o Equals e o Hashcode precisam ser os mesmos APENAS nos marcados¹
 @Getter
 @Setter
-@Entity
+@Entity // Setta a classe abaixo como sendo uma entidade que recebe os atributos dentro dela
 @Table(name = "clients") // Nome da tabela no Banco de Dados
 public class Client {
 
 
-    @EqualsAndHashCode.Include // Equal e Hashcode marcado¹
+    @NotNull(groups = ValidationGroups.ClientId.class) // Proibe o usuário de deixar o valor em branco. O restante serve
+    // para validar no momento do post, desobrigando declarar o ID no JSON, por exemplo. Só funciona porque não é o Default
+    @EqualsAndHashCode.Include // Equals e Hashcode marcado¹
     @Id // Indica a variável que vai segurar o ID do usuário
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que a ordem de geração de novos valores seguirá regras do BD
     private Long id;
 
 

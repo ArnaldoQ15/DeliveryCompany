@@ -1,4 +1,4 @@
-package com.deliverycompany.api.exceptionhandler;
+package com.deliverycompany.api.exception;
 
 import java.io.Serial;
 
