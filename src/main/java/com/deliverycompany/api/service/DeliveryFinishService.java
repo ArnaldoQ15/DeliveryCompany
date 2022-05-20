@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @AllArgsConstructor
-@Service
+@Service // Indica que é um classe de serviço. Essencial para evitar a declaração de códigos boilerplate
 public class DeliveryFinishService {
 
     private DeliveryRepository deliveryRepository;
     private SearchDeliveryService searchDeliveryService;
 
     @Transactional
-    public void finish(Long deliveryId) {
+    public void finish(Long deliveryId) { // Método para chamar a finalização de um pedido a partir do PUT no BD
         Delivery delivery = searchDeliveryService.search(deliveryId);
 
         delivery.finish();

@@ -64,6 +64,7 @@ public class DeliveryController {
                     deliveryResponse.setRequestDateFinished(delivery.getRequestDateFinished()); */
     }
 
+
     @PutMapping("/{deliveryId}/finish")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void finish(@PathVariable Long deliveryId) {

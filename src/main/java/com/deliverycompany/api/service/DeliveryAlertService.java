@@ -18,8 +18,8 @@ public class DeliveryAlertService {
     private DeliveryRepository deliveryRepository; // Invoca o repositório de entregas
 
     @Transactional
-    public Delivery request(Delivery delivery) {
-        Client client = clientService.searchClient(delivery.getClient().getId()); // Método de busca de usuário por ID
+    public Delivery request(Delivery delivery) { // Método de busca de usuário por ID
+        Client client = clientService.searchClient(delivery.getClient().getId());
 
         delivery.setClient(client); // Setta o objeto cliente com os atributos criados para ser adicionado ao repositório
         delivery.setStatus(DeliveryStatus.PENDING); // Setta status padrão como pendente no ato de salvamento

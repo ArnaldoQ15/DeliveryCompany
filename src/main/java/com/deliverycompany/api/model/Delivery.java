@@ -76,11 +76,14 @@ public class Delivery {
         setRequestDateFinished(OffsetDateTime.now());
     }
 
-    public boolean canBeFinished() { // Verifica se pode ser finalizado
+    // Verifica se pode ser finalizado
+    public boolean canBeFinished() {
         return DeliveryStatus.PENDING.equals(getStatus());
     }
 
-    public boolean cantBeFinished() { // Verifica se NÃO pode ser finalizado
+    // Verifica se NÃO pode ser finalizado
+    public boolean cantBeFinished() {
         return !canBeFinished();
     }
+
 }

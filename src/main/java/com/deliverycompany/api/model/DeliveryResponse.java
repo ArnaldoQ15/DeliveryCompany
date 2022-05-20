@@ -8,11 +8,12 @@ import java.time.OffsetDateTime;
 
 @Getter
 @Setter
-public class DeliveryResponse {
+public class DeliveryResponse { // Essa classe serve para utilizar apenas os dados abaixo elencados ao ser chamada
 
     private Long id;
     private ClientInfoResponse client;
     private RecipientResponse recipient;
+    private OccurrenceResponse occurrences;
     private BigDecimal tax;
     private DeliveryStatus status;
     private OffsetDateTime requestDate;

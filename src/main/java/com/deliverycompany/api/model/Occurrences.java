@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity // NECESSÁRIO ADICIONAR ENTITY EM AMBOS OS MODELS CASO POSSUA @ONETOMANY
+@Entity // NECESSÁRIO ADICIONAR ENTITY EM AMBOS OS MODELS CASO POSSUA @OneToMany
 public class Occurrences {
 
     @EqualsAndHashCode.Include
@@ -18,10 +18,10 @@ public class Occurrences {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne // Muitas Occurrences para apenas um Delivery
     private Delivery delivery;
 
     private String description;
-    private OffsetDateTime registerDate;
+    private OffsetDateTime registerDate; // OffsetDateTime inclui o fuso horário na declaração de horário
 
 }

@@ -24,14 +24,13 @@ public class ClientService {
                 .stream() // Permite executar várias tarefas de maneira mais simples
                 .anyMatch(clientExist -> !clientExist.equals(client));
 
-        if (emailInUse) {
+        if (emailInUse) { // Regra de negócio que proibe a criação de dois clientes com o mesmo endereço de e-mail
             throw new BusinessException(("There is already a client registered with this email."));
         }
         return clientRepository.save(client);
     }
 
-
-    // O método abaixo exclui um cliente
+    // O método abaixo exclui um cliente a partir do ID
     @Transactional
     public void deleteClient(Long clientId) {
         clientRepository.deleteById(clientId);

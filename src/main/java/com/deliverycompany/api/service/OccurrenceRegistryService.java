@@ -13,7 +13,7 @@ public class OccurrenceRegistryService {
 
     private SearchDeliveryService searchDeliveryService;
 
-    @Transactional
+    @Transactional // Trata-se de uma transação, ou seja, se não resultar em sucesso tudo é revertido. Conceito de "rollback"
     public Occurrences register(Long deliveryId, String description) {
         Delivery delivery = searchDeliveryService.search(deliveryId);
         
